@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <locale.h>
+#include <windows.h>
+
+
+void genkiDama(int n) {
+    if (n < 0) {
+        printf("Genki-Dama lançada! \n");
+        return;
+    }
+
+    printf("%d\n", n);
+    Sleep(400);
+    genkiDama(n - 1);
+}
+
+int somaKi(int n) {
+    if (n == 0) {
+        // Caso base: sem Ki, sem luta
+        return 0;
+    }
+
+    return n + somaKi(n - 1);
+}
+
+
+int multiplicar(int a, int b) {
+    if (b == 0) {
+        // Caso base: sem adversário, sem dano
+        return 0;
+    }
+
+    return a + multiplicar(a, b - 1);
+}
+
+
+int inverterAux(int n, int invertido) {
+    if (n == 0) {
+        return invertido;
+    }
+
+    return inverterAux(n / 10, invertido * 10 + (n % 10));
+}
+
+
+int inverterNumero(int n) {
+    return inverterAux(n, 0);
+}
+
+
+void repetirNome(char nome[], int vezes) {
+    if (vezes == 0) {
+        // Caso base: o personagem já se apresentou o suficiente
+        return;
+    }
+
+    printf("%s\n", nome);
+    repetirNome(nome, vezes - 1);
+}
+
+int fatorial(int n) {
+    if (n == 0 || n == 1) {
+        // Caso base: nível base de poder (forma normal)
+        return 1;
+    }
+
+    return n * fatorial(n - 1);
+}
+
+int potencia(int base, int exp) {
+    if (exp == 0) {
+        // Caso base: qualquer guerreiro elevado a 0 vira 1 ??
+        return 1;
+    }
+
+    return base * potencia(base, exp - 1);
+}
+
+int main() {
+    setlocale(LC_ALL, "Portuguese");
+
+    printf("=== Contagem Genki-Dama ===\n");
+    genkiDama(10);
+
+    printf("\n=== Soma do Ki acumulado ===\n");
+    printf("Ki total: %d\n", somaKi(5));
+
+    printf("\n=== Multiplicação recursiva ===\n");
+    printf("Resultado: %d\n", multiplicar(4, 3));
+
+    printf("\n=== Inverter número ===\n");
+    printf("Invertido: %d\n", inverterNumero(1234));
+
+    printf("\n=== Repetir nome ===\n");
+    repetirNome("Goku", 3);
+
+    printf("\n=== Fatorial DBZ ===\n");
+    printf("5! = %d\n", fatorial(5));
+
+    printf("\n=== Potência DBZ ===\n");
+    printf("2^4 = %d\n", potencia(2, 4));
+
+    return 0;
+}
