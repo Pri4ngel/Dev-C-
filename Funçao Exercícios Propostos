@@ -1,1 +1,58 @@
+#include <stdio.h>
 
+	float recuperarHP(float hpAtual, float cura){
+		return hpAtual + cura;
+	}
+	void mostrarStatus(char nome[], float hp, float poder){
+		printf("Nome: %s\n", nome);
+		printf("HP: %.1f\n", hp);
+		printf("Poder: %.1f\n", poder);
+	}
+	int venceu(float hp){
+		if (hp <= 0)
+		return 1;
+		else
+		return 0;
+	}
+	int main(){
+
+		char nome[30] = "Goku";
+		float hp = 100.0;
+		float poder = 20.0;
+		float cura = 30.0;
+		
+		int opcao;
+		int rodada = 1;
+		
+		while (rodada <= 2){
+			printf("......RODADA %d .......\n", rodada);
+			mostrarStatus(nome, hp, poder);
+			
+			printf("1 - Atacar \n");
+			printf("2 - Curar \n");
+			printf("3 - Sair \n");
+			printf("Escolha: \n");
+			scanf("%d", &opcao);
+			
+			if (opcao == 1){
+				hp -= poder;
+				printf("Ataque feito! \n");
+				
+				if(venceu(hp)){
+					printf("HP zerou! Fim de jogo \n");
+					break;
+				}
+			}
+			if (opcao == 2){
+				hp = recuperarHP (hp, cura);
+				printf("Curou o HP! \n");
+			}
+			if (opcao == 3){
+				printf("Saiu do jogo. \n");
+				break;
+			}
+			rodada++;
+		}
+	printf("Programa finalizado, \n");
+	return 0;
+}
